@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Page</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  #dropdown-container {
+    width: 100%;
+  }
+
+  #content {
+    padding: 20px;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<!-- Load dropdown -->
+<div id="dropdown-container"></div>
+
+<!-- Page content -->
+<div id="content"></div>
+
+<script>
+  // Load drop-down.html
+  fetch('ui/drop-down.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('dropdown-container').innerHTML = data;
+
+      const dropdown = document.querySelector('#dropdown-container .dropdown');
+      const menuIcon = document.querySelector('#dropdown-container .menu-icon');
+
+      menuIcon.addEventListener('click', () => {
+        dropdown.classList.toggle('show');
+      });
+
+      dropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const page = link.getAttribute('data-page');
+          loadPage(page);
+          dropdown.classList.remove('show');
+        });
+      });
+    });
+
+  // Load page.html by default
+  function loadPage(page) {
+    fetch(`ui/${page}`)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('content').innerHTML = data;
+      });
+  }
+
+  loadPage('page.html');
+</script>
+
+</body>
+</html>

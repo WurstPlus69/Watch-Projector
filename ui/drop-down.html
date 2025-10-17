@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Dropdown Menu</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+
+  /* Navbar */
+  .navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* icon on right */
+    align-items: center;
+  }
+
+  .navbar h3 {
+    margin: 0;
+  }
+
+  /* Hamburger icon */
+  .menu-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .menu-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    border-radius: 2px;
+  }
+
+  /* Dropdown (no transition) */
+  .dropdown {
+    background-color: #f1f1f1;
+    display: none;
+  }
+
+  .dropdown.show {
+    display: block;
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .dropdown a:hover {
+    background-color: #ddd;
+  }
+
+  /* Main content */
+  .content {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <h3>My Website</h3>
+  <div class="menu-icon" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<!-- Dropdown -->
+<div id="dropdown" class="dropdown">
+  <a href="#">Hello</a>
+  <a href="#">Hi</a>
+</div>
+
+<script>
+  function toggleMenu() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
