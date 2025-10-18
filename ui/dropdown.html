@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamburger Menu with Push</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Top gray bar */
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: gray;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+  }
+
+  /* Hamburger icon */
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 60px;
+    height: 85px;
+    cursor: pointer;
+    position: relative;
+    top: 0.5px;
+    right: 11px;
+  }
+
+  .menu-icon div {
+    background-color: white;
+    height: 10px;
+    border-radius: 5px;
+  }
+
+  /* Dropdown buttons */
+  #dropdownContainer {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 999;
+  }
+
+  #dropdownContainer button {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: #f0f0f0;
+    padding: 15px 0;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s;
+  }
+
+  #dropdownContainer button:last-child {
+    border-bottom: none;
+  }
+
+  #dropdownContainer button:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* Container for page.html content */
+  #pageContainer {
+    transition: margin-top 0.3s ease;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<!-- Top gray bar with hamburger -->
+<div class="top-bar">
+  <div class="menu-icon" id="menuToggle">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<!-- Dropdown buttons -->
+<div id="dropdownContainer">
+  <button>Hello</button>
+  <button>Run</button>
+  <button>Hi</button>
+  <button>Bye</button>
+</div>
+
+<!-- External page content -->
+<div id="pageContainer">
+  <iframe src="page.html" style="width:100%; border:none; height:500px;" id="pageFrame"></iframe>
+</div>
+
+<script>
+  const menuIcon = document.getElementById('menuToggle');
+  const dropdown = document.getElementById('dropdownContainer');
+  const pageContainer = document.getElementById('pageContainer');
+  let isOpen = false;
+
+  menuIcon.addEventListener('click', () => {
+    if (!isOpen) {
+      dropdown.style.display = 'block';
+      // Push content just a little below dropdown (10px extra)
+      pageContainer.style.marginTop = (dropdown.offsetHeight + 0) + 'px';
+      isOpen = true;
+    } else {
+      dropdown.style.display = 'none';
+      pageContainer.style.marginTop = '0';
+      isOpen = false;
+    }
+  });
+</script>
+
+</body>
+</html>
